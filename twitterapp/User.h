@@ -9,9 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @interface User : NSObject
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *profilePicUrl;
+@property (nonatomic, strong) NSString *location;
 
 +(User *)currentUser;
 
 +(void)setCurrentUser:(User *)user;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
++ (NSArray *)usersWithArray:(NSArray *)array;
 
 @end

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "TwitterClient.h"
+#import "TimeLineViewController.h"
 
 //code copied from
 //https://github.com/questbeat/Categories/blob/master/iOS/NSURL%2BdictionaryFromQueryString/NSURL%2BdictionaryFromQueryString.m
@@ -40,7 +41,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = [[LoginViewController alloc] init];
+    //self.window.rootViewController = [[LoginViewController alloc] init];
+    
+    LoginViewController *vc = [[LoginViewController alloc] init];
+    self.nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    self.window.rootViewController = self.nvc;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -99,6 +105,9 @@
                                              
                                              [client homeTimelineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject){
                                                  NSLog(@"response: %@", responseObject);
+                                                 NSArray *tweets = responseObject;
+                                                 TimeLineViewController *vc = [[TimeLineViewController alloc] initWithArray:tweets];
+                                                 [self.nvc pushViewController:vc animated:YES];
                                              }failure:^(AFHTTPRequestOperation *operation, NSError *error){
                                                  NSLog(@"response error");
                                              }];

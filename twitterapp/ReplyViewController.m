@@ -1,29 +1,26 @@
 //
-//  LoginViewController.m
+//  ReplyViewController.m
 //  twitterapp
 //
-//  Created by Bharti Agrawal on 6/30/14.
+//  Created by Bharti Agrawal on 7/5/14.
 //  Copyright (c) 2014 Yahoo Inc. All rights reserved.
 //
 
-#import "LoginViewController.h"
-#import "TwitterClient.h"
-#import "TimeLineViewController.h"
+#import "ReplyViewController.h"
 
-@interface LoginViewController ()
-- (IBAction)onLoginButton:(id)sender;
+@interface ReplyViewController ()
 
-@property (nonatomic, strong) NSArray *tweets;
 @end
 
-@implementation LoginViewController
+@implementation ReplyViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        //[self onLoginButton:nil];
+        self.title = @"Reply";
+
     }
     return self;
 }
@@ -38,10 +35,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)onLoginButton:(id)sender {
-    [[TwitterClient instance] login];
 }
 
 @end

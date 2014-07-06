@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TimeLineViewController : UIViewController
+@interface TimeLineViewController : UIViewController <UITableViewDataSource>
+
+- (TimeLineViewController *) initWithArray:(NSArray *)tweets;
 
 @end
