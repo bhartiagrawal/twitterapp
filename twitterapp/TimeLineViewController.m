@@ -10,6 +10,7 @@
 #import "TweetCell.h"
 #import "TweetViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "Tweet.h"
 
 @interface TimeLineViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -51,7 +52,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (TimeLineViewController *) initWithArray:(NSArray *)tweets{
-    self.tweets = tweets;
+    self.tweets = [Tweet tweetsWithArray:tweets];
     return self;
 }
 
@@ -67,30 +68,13 @@
     
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     
-    NSDictionary *tweet = self.tweets[indexPath.row];
-    
-    NSString *imageUrl = tweet[@"user"][@"profile_image_url"];
-    NSURL *url = [NSURL URLWithString:imageUrl];
+    Tweet *tweet = self.tweets[indexPath.row];
+    NSURL *url = [NSURL URLWithString:tweet.author.profilePicUrl];
     [cell.authorView setImageWithURL:url];
+    cell.authorLabel.text = tweet.author.name;
+    cell.textLabel.text = tweet.text;
+    cell.authorTabLabel.text = tweet.author.screenName;
 
-    cell.authorLabel.text = tweet[@"user"][@"name"];
-    cell.textLabel.text = tweet[@"text"];
-    
-    NSString *handle = [NSString stringWithFormat:@"@%@",tweet[@"user"][@"screen_name"]];
-    cell.authorTabLabel.text = handle;
-    
-    //"Sun Jul 06 00:35:15 +0000 2014"
-    NSString *dateString = tweet[@"created_at"];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
-    [dateFormatter setDateFormat:@"DDD MMM d hh:mm:ss +0000 yyyy"];
-    NSDate *dateFromString = nil;
-    dateFromString = [dateFormatter dateFromString:dateString];
-    NSLog(@"%@",dateFromString);
-    NSDate *today = [[NSDate alloc] init];
-    //cell.ageLabel.text = [NSString alloc] initWithFormat:@"%d",[[today timeIntervalSinceDate:dateFromString] ];
-    
-    
     return cell;
 }
 
@@ -98,13 +82,10 @@
 {
     NSLog(@"didSelectRowAtIndexPath: %d", indexPath.row); // you can see selected row number in your console;
     
-    NSDictionary *tweet = self.tweets[indexPath.row];
-    NSString *name = tweet[@"posters"][@"original"];
-    NSString *text = tweet[@"user"][@"text"];
+    Tweet *tweet = self.tweets[indexPath.row];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:name forKey:@"name"];
-    [defaults setObject:text forKey:@"description"];
+    [defaults setObject:tweet forKey:@"currentTweet"];
     [defaults synchronize];
     
     [self.navigationController pushViewController:[[TweetViewController alloc] init] animated:YES];

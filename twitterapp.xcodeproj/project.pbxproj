@@ -16,6 +16,7 @@
 		487E56551968D6A700B49F6E /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 487E56531968D6A700B49F6E /* TweetCell.xib */; };
 		487E56591968DABF00B49F6E /* ReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487E56571968DABF00B49F6E /* ReplyViewController.m */; };
 		487E565A1968DABF00B49F6E /* ReplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 487E56581968DABF00B49F6E /* ReplyViewController.xib */; };
+		487E565D196A728000B49F6E /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 487E565C196A728000B49F6E /* Tweet.m */; };
 		48904D6D1962723000EC3E95 /* TwitterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 48904D6C1962723000EC3E95 /* TwitterClient.m */; };
 		48904D711962736A00EC3E95 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48904D6F1962736A00EC3E95 /* LoginViewController.m */; };
 		48904D721962736A00EC3E95 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48904D701962736A00EC3E95 /* LoginViewController.xib */; };
@@ -60,6 +61,8 @@
 		487E56561968DABF00B49F6E /* ReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyViewController.h; sourceTree = "<group>"; };
 		487E56571968DABF00B49F6E /* ReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyViewController.m; sourceTree = "<group>"; };
 		487E56581968DABF00B49F6E /* ReplyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReplyViewController.xib; sourceTree = "<group>"; };
+		487E565B196A728000B49F6E /* Tweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
+		487E565C196A728000B49F6E /* Tweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
 		48904D6B1962723000EC3E95 /* TwitterClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterClient.h; sourceTree = "<group>"; };
 		48904D6C1962723000EC3E95 /* TwitterClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterClient.m; sourceTree = "<group>"; };
 		48904D6E1962736A00EC3E95 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -172,6 +175,8 @@
 				487E56561968DABF00B49F6E /* ReplyViewController.h */,
 				487E56571968DABF00B49F6E /* ReplyViewController.m */,
 				487E56581968DABF00B49F6E /* ReplyViewController.xib */,
+				487E565B196A728000B49F6E /* Tweet.h */,
+				487E565C196A728000B49F6E /* Tweet.m */,
 			);
 			path = twitterapp;
 			sourceTree = "<group>";
@@ -345,6 +350,7 @@
 				48904D6D1962723000EC3E95 /* TwitterClient.m in Sources */,
 				487E56591968DABF00B49F6E /* ReplyViewController.m in Sources */,
 				487E56411966301400B49F6E /* User.m in Sources */,
+				487E565D196A728000B49F6E /* Tweet.m in Sources */,
 				487E564F1966656300B49F6E /* TweetViewController.m in Sources */,
 				48C5C83019613C060066E3CD /* AppDelegate.m in Sources */,
 				48C5C85019613CB00066E3CD /* RottenTomatoesClient.m in Sources */,

@@ -37,6 +37,8 @@ static User *currentUser = nil;
         self.name = dictionary[@"name"];
         self.profilePicUrl = dictionary[@"profile_image_url_https"];
         self.location = dictionary[@"location"];
+        self.screenName = [NSString stringWithFormat:@"@%@",dictionary[@"screen_name"]];
+        
     }
     
     return self;

@@ -12,6 +12,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *profilePicUrl;
 @property (nonatomic, strong) NSString *location;
+@property (nonatomic, strong) NSString *screenName;
 
 +(User *)currentUser;
 
