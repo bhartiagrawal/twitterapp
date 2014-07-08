@@ -13,6 +13,9 @@
 #import "Tweet.h"
 
 @interface TimeLineViewController ()
+{
+    UIRefreshControl *refreshControl;
+}
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *tweets;
 
@@ -36,6 +39,7 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    [self addPullToRefresh];
     // Do any additional setup after loading the view from its nib.
     
     [self.tableView registerNib:[UINib nibWithNibName:@"TweetCell" bundle:nil] forCellReuseIdentifier:@"TweetCell"];
@@ -56,6 +60,20 @@
     return self;
 }
 
+- (void) addPullToRefresh
+{
+    NSLog(@"addPullToRefresh");
+    refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshView) forControlEvents:UIControlEventValueChanged];
+    
+    NSMutableAttributedString *refreshString = [[NSMutableAttributedString alloc] initWithString:@"Pull To Refresh"];
+    [refreshString addAttributes:@{NSForegroundColorAttributeName : [UIColor grayColor]} range:NSMakeRange(0, refreshString.length)];
+    refreshControl.attributedTitle = refreshString;
+    
+    [self.tableView addSubview:refreshControl];
+    
+}
+
 #pragma mark - Table View methods
 - (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSLog(@"numberOfRowsInSection: %d", self.tweets.count);
@@ -74,7 +92,14 @@
     cell.authorLabel.text = tweet.author.name;
     cell.textLabel.text = tweet.text;
     cell.authorTabLabel.text = tweet.author.screenName;
-
+    cell.ageLabel.text = tweet.age;
+    if (tweet.retweeted <= 0){
+        cell.reweetedLabel.text = @"";
+    } else if (tweet.retweetedBy != nil)
+        cell.reweetedLabel.text = [NSString stringWithFormat:@"%@ retweeted", tweet.retweetedBy];
+    else {
+        cell.reweetedLabel.text = @"retweeted";
+    }
     return cell;
 }
 
@@ -85,7 +110,15 @@
     Tweet *tweet = self.tweets[indexPath.row];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:tweet forKey:@"currentTweet"];
+    [defaults setObject:tweet.author.name forKey:@"authorName"];
+    [defaults setObject:tweet.age forKey:@"age"];
+    [defaults setObject:tweet.author.profilePicUrl forKey:@"picUrl"];
+    [defaults setObject:tweet.author.screenName forKey:@"authorScreenName"];
+    [defaults setObject:tweet.text forKey:@"text"];
+    [defaults setObject:tweet.formatedDate forKey:@"formattedDate"];
+    [defaults setObject:tweet.retweeted forKey:@"retweeted"];
+    [defaults setObject:tweet.retweetedBy forKey:@"retweetedBy"];
+    [defaults setObject:tweet.favorited forKey:@"favorited"];
     [defaults synchronize];
     
     [self.navigationController pushViewController:[[TweetViewController alloc] init] animated:YES];

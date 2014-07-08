@@ -15,6 +15,9 @@
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSString *retweeted;
 @property (nonatomic, strong) NSString *retweetedBy;
+@property (nonatomic, strong) NSString *age;
+@property (nonatomic, strong) NSString *formatedDate;
+@property (nonatomic, strong) NSString *favorited;
 
 +(Tweet *)currentTweet;
 

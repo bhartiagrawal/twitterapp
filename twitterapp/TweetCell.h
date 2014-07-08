@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *authorTabLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ageLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *authorView;
+@property (weak, nonatomic) IBOutlet UILabel *reweetedLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
 - (IBAction)reply:(id)sender;

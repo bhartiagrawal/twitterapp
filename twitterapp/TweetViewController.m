@@ -19,6 +19,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *tweetTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *retweetedLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *authorImageView;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *retweetsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *favoritesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *retweetedByLabel;
 
 @end
 
@@ -45,15 +49,27 @@
     self.navigationItem.rightBarButtonItem = rightButton;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    Tweet *tweet = [defaults objectForKey:@"currentTweet"];
+    NSString *retweetedCount = [defaults stringForKey:@"retweeted"];
+    NSString *favoriteCount = [defaults stringForKey:@"favorited"];
+    NSString *retweetedBy = [defaults stringForKey:@"retweetedBy"];
     
-    NSURL *url = [NSURL URLWithString:tweet.author.profilePicUrl];
+    NSURL *url = [NSURL URLWithString:[defaults stringForKey:@"picUrl"]];
     [self.authorImageView setImageWithURL:url];
-    self.authorNameLabel.text = tweet.author.name;
-    self.tweetTextLabel.text = tweet.text;
-    self.authorScreenNameLabel.text = tweet.author.screenName;
-
+    self.authorNameLabel.text = [defaults stringForKey:@"authorName"];
+    self.tweetTextLabel.text = [defaults stringForKey:@"text"];
+    self.authorScreenNameLabel.text = [defaults stringForKey:@"authorScreenName"];
+    self.dateLabel.text = [defaults stringForKey:@"formattedDate"];
+    self.retweetedLabel.text = retweetedCount;
+    self.favoritesLabel.text = favoriteCount;
     
+    if (retweetedCount <= 0){
+        self.retweetedByLabel.text = @"";
+    } else if (retweetedBy != nil)
+        self.retweetedByLabel.text = [NSString stringWithFormat:@"%@ retweeted", retweetedBy];
+    else {
+        self.retweetedByLabel.text = @"retweeted";
+    }
+    self.retweetedByLabel.text = [defaults stringForKey:@"retweetedBy"];
 
 }
 
