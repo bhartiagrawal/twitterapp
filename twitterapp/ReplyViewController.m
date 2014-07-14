@@ -7,8 +7,14 @@
 //
 
 #import "ReplyViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ReplyViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *authorPicView;
+@property (weak, nonatomic) IBOutlet UILabel *authorName;
+@property (weak, nonatomic) IBOutlet UILabel *authorScreenName;
+@property (nonatomic, strong) Tweet *tweet;
+
 
 @end
 
@@ -29,6 +35,17 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    NSURL *url = [NSURL URLWithString:self.tweet.author.profilePicUrl];
+    [self.authorPicView setImageWithURL:url];
+    self.authorName.text = self.tweet.author.name;
+    self.authorScreenName.text = self.tweet.author.screenName;
+
+}
+
+- (ReplyViewController *) initWithTweet:(Tweet *)tweet{
+    self.tweet = tweet;
+    return self;
 }
 
 - (void)didReceiveMemoryWarning

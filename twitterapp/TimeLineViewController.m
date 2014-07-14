@@ -55,6 +55,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (TimeLineViewController *) initWithArray:(NSArray *)tweets{
     self.tweets = [Tweet tweetsWithArray:tweets];
     return self;
@@ -73,6 +74,13 @@
     [self.tableView addSubview:refreshControl];
     
 }
+
+- (void) refreshView
+{
+    NSLog(@"refreshTweets");
+    self.tweets = [Tweet reloadTweets];
+}
+
 
 #pragma mark - Table View methods
 - (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -109,19 +117,9 @@
     
     Tweet *tweet = self.tweets[indexPath.row];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:tweet.author.name forKey:@"authorName"];
-    [defaults setObject:tweet.age forKey:@"age"];
-    [defaults setObject:tweet.author.profilePicUrl forKey:@"picUrl"];
-    [defaults setObject:tweet.author.screenName forKey:@"authorScreenName"];
-    [defaults setObject:tweet.text forKey:@"text"];
-    [defaults setObject:tweet.formatedDate forKey:@"formattedDate"];
-    [defaults setObject:tweet.retweeted forKey:@"retweeted"];
-    [defaults setObject:tweet.retweetedBy forKey:@"retweetedBy"];
-    [defaults setObject:tweet.favorited forKey:@"favorited"];
-    [defaults synchronize];
+    TweetViewController *vc = [[TweetViewController alloc] initWithTweet:tweet];
     
-    [self.navigationController pushViewController:[[TweetViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

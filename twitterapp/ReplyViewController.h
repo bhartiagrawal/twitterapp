@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Tweet.h"
 
 @interface ReplyViewController : UIViewController
+
+- (ReplyViewController *) initWithTweet:(Tweet *)tweet;
+
 
 @end

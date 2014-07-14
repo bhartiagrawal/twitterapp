@@ -7,10 +7,37 @@
 //
 
 #import "Tweet.h"
+#import "TwitterClient.h"
+
+//code copied from
+//https://github.com/questbeat/Categories/blob/master/iOS/NSURL%2BdictionaryFromQueryString/NSURL%2BdictionaryFromQueryString.m
+//
+@implementation NSURL (dictionaryFromQueryString)
+
+- (NSDictionary *)dictionaryFromQueryString
+{
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    
+    NSArray *pairs = [[self query] componentsSeparatedByString:@"&"];
+    
+    for(NSString *pair in pairs) {
+        NSArray *elements = [pair componentsSeparatedByString:@"="];
+        
+        NSString *key = [[elements objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *val = [[elements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        [dictionary setObject:val forKey:key];
+    }
+    
+    return dictionary;
+}
+
+@end
 
 @implementation Tweet
 
 static Tweet *currentTweet = nil;
+static NSArray *tweets = nil;
 
 +(Tweet *)currentTweet{
     if (currentTweet == nil){
@@ -29,6 +56,10 @@ static Tweet *currentTweet = nil;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:currentTweet forKey:@"current_tweet"];
     [defaults synchronize];
+}
+
++(NSArray *) getTweets{
+    return tweets;
 }
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
@@ -56,7 +87,7 @@ static Tweet *currentTweet = nil;
     [dateFormatter setDateFormat:@"EEE MMM dd hh:mm:ss zzzz yyyy"];
     NSDate *date = [dateFormatter dateFromString:dateStr];
     //NSLog(@"%@",date);
-    NSDate *today = [[NSDate alloc] init];
+    //NSDate *today = [[NSDate alloc] init];
 
     NSTimeInterval timeSinceDate = [[NSDate date] timeIntervalSinceDate:date];
     
@@ -85,16 +116,97 @@ static Tweet *currentTweet = nil;
     return @"";
 }
 
+
+//
+// Code copied from
+//https://github.com/bdbergeron/BDBOAuth1Manager
+//
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    if ([url.scheme isEqualToString:@"cptwitter"])
+    {
+        if ([url.host isEqualToString:@"oauth"])
+        {
+            NSDictionary *parameters = [url dictionaryFromQueryString];
+            if (parameters[@"oauth_token"] && parameters[@"oauth_verifier"]){
+                TwitterClient * client = [TwitterClient instance];
+                [client fetchAccessTokenWithPath:@"/oauth/access_token"
+                                          method:@"POST"
+                                    requestToken:[BDBOAuthToken tokenWithQueryString:url.query]
+                                         success:^(BDBOAuthToken *accessToken) {
+                                             NSLog(@"Access token");
+                                             [client.requestSerializer saveAccessToken:accessToken];
+                                             
+                                             [client homeTimelineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject){
+                                                 NSLog(@"response: %@", responseObject);
+                                                 NSArray *tweetsArray = responseObject;
+                                                 tweets = [Tweet tweetsWithArray:tweetsArray];
+                                                 
+                                             }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+                                                 NSLog(@"response error");
+                                             }];
+                                             
+                                         }failure:^(NSError *error){
+                                             NSLog(@"access failure");
+                                         }];
+            }
+        }
+        return YES;
+    }
+    return NO;
+}
+
+
 + (NSArray *)tweetsWithArray:(NSArray *)array {
-    NSMutableArray *tweets = [[NSMutableArray alloc] init];
+    NSMutableArray *tweetsArray = [[NSMutableArray alloc] init];
     
     for (NSDictionary *dictionary in array) {
         Tweet *tweet = [[Tweet alloc] initWithDictionary:dictionary];
-        [tweets addObject:tweet];
+        [tweetsArray addObject:tweet];
     }
-    
+    return tweetsArray;
+}
+
++ (NSArray *) reloadTweets{
+    NSURL *url = [[NSURL alloc] initWithString:@"cptwitter/oauth"];
+    //__block NSArray *tweets;
+    if ([url.scheme isEqualToString:@"cptwitter"])
+    {
+        if ([url.host isEqualToString:@"oauth"])
+        {
+            NSDictionary *parameters = [url dictionaryFromQueryString];
+            if (parameters[@"oauth_token"] && parameters[@"oauth_verifier"]){
+                TwitterClient * client = [TwitterClient instance];
+                [client fetchAccessTokenWithPath:@"/oauth/access_token"
+                                          method:@"POST"
+                                    requestToken:[BDBOAuthToken tokenWithQueryString:url.query]
+                                         success:^(BDBOAuthToken *accessToken) {
+                                             NSLog(@"Access token");
+                                             [client.requestSerializer saveAccessToken:accessToken];
+                                             
+                                             [client homeTimelineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject){
+                                                 NSLog(@"response: %@", responseObject);
+                                                 NSArray *tweetsArray = responseObject;
+                                                 tweets = [Tweet tweetsWithArray:tweetsArray];
+                                                 
+                                             }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+                                                 NSLog(@"response error");
+                                             }];
+                                             
+                                         }failure:^(NSError *error){
+                                             NSLog(@"access failure");
+                                         }];
+            }
+        }
+        //return YES;
+    }
     return tweets;
 }
+                
 
 
 @end

@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString *age;
 @property (nonatomic, strong) NSString *formatedDate;
 @property (nonatomic, strong) NSString *favorited;
+//@property (nonatomic, strong) __block NSMutableArray *tweets;
 
 +(Tweet *)currentTweet;
 
@@ -25,6 +26,6 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)tweetsWithArray:(NSArray *)array;
-
++ (NSArray *)reloadTweets;
 
 @end
