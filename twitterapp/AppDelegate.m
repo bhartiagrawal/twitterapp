@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "TwitterClient.h"
-#import "TimeLineViewController.h"
+#import "ContainerViewController.h"
 
 //code copied from
 //https://github.com/questbeat/Categories/blob/master/iOS/NSURL%2BdictionaryFromQueryString/NSURL%2BdictionaryFromQueryString.m
@@ -84,6 +84,7 @@
 //https://github.com/bdbergeron/BDBOAuth1Manager
 //
 
+
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -106,8 +107,8 @@
                                              [client homeTimelineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject){
                                                  NSLog(@"response: %@", responseObject);
                                                  NSArray *tweets = responseObject;
-                                                 TimeLineViewController *vc = [[TimeLineViewController alloc] initWithArray:tweets];
-                                                 [self.nvc pushViewController:vc animated:YES];
+                                                 ContainerViewController *cvc = [[ContainerViewController alloc]initWithArray:tweets];
+                                                 [self.nvc pushViewController:cvc animated:YES];
                                              }failure:^(AFHTTPRequestOperation *operation, NSError *error){
                                                  NSLog(@"response error");
                                              }];

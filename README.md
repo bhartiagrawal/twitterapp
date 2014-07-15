@@ -3,7 +3,7 @@ twitterapp
 
 Overview: Build a simple Twitter client that supports viewing a Twitter timeline and composing a new tweet.
 
-Hours:
+Hours: 10
 
 User Stories completed:
 - User can sign in using OAuth login flow
@@ -13,12 +13,9 @@ User Stories completed:
 - User can pull to refresh
 - User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
 
-User Stories not completed:
-- User can compose a new tweet by tapping on a compose button. - getting an exception.
-- Optional: When composing, you should have a countdown in the upper right for the tweet limit.
-- Optional: After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
-- Optional: Retweeting and favoriting should increment the retweet and favorite count.
-- Optional: User should be able to unretweet and unfavorite and should decrement the retweet and favorite count.
-- Optional: Replies should be prefixed with the username and the reply_id should be set when posting the tweet,
-- Optional: User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
-![Twitterapp](twitterapp.gif)
+Week 5 stories completed
+- Cleaned up the exception I got last week
+- Created a container view with sub views. Add the hamburger menu icon.
+
+
+![Twitterapp2](twitterapp2.gif)

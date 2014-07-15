@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48275A9A1974DFAE006E1FA9 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48275A981974DFAE006E1FA9 /* ContainerViewController.m */; };
+		48275A9B1974DFAE006E1FA9 /* ContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48275A991974DFAE006E1FA9 /* ContainerViewController.xib */; };
+		486630361973846D002A740C /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 486630341973846D002A740C /* MainMenuViewController.m */; };
+		486630371973846D002A740C /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 486630351973846D002A740C /* MainMenuViewController.xib */; };
+		4866303B197384AA002A740C /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48663039197384AA002A740C /* ProfileViewController.m */; };
+		4866303C197384AA002A740C /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4866303A197384AA002A740C /* ProfileViewController.xib */; };
 		487E56411966301400B49F6E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 487E56401966301400B49F6E /* User.m */; };
 		487E5645196639DE00B49F6E /* TimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487E5643196639DE00B49F6E /* TimeLineViewController.m */; };
 		487E5646196639DE00B49F6E /* TimeLineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 487E5644196639DE00B49F6E /* TimeLineViewController.xib */; };
@@ -47,6 +53,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		48275A971974DFAE006E1FA9 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
+		48275A981974DFAE006E1FA9 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
+		48275A991974DFAE006E1FA9 /* ContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainerViewController.xib; sourceTree = "<group>"; };
+		486630331973846D002A740C /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
+		486630341973846D002A740C /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
+		486630351973846D002A740C /* MainMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuViewController.xib; sourceTree = "<group>"; };
+		48663038197384AA002A740C /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		48663039197384AA002A740C /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		4866303A197384AA002A740C /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		487E563F1966301400B49F6E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		487E56401966301400B49F6E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		487E5642196639DE00B49F6E /* TimeLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLineViewController.h; sourceTree = "<group>"; };
@@ -177,6 +192,15 @@
 				487E56581968DABF00B49F6E /* ReplyViewController.xib */,
 				487E565B196A728000B49F6E /* Tweet.h */,
 				487E565C196A728000B49F6E /* Tweet.m */,
+				486630331973846D002A740C /* MainMenuViewController.h */,
+				486630341973846D002A740C /* MainMenuViewController.m */,
+				486630351973846D002A740C /* MainMenuViewController.xib */,
+				48663038197384AA002A740C /* ProfileViewController.h */,
+				48663039197384AA002A740C /* ProfileViewController.m */,
+				4866303A197384AA002A740C /* ProfileViewController.xib */,
+				48275A971974DFAE006E1FA9 /* ContainerViewController.h */,
+				48275A981974DFAE006E1FA9 /* ContainerViewController.m */,
+				48275A991974DFAE006E1FA9 /* ContainerViewController.xib */,
 			);
 			path = twitterapp;
 			sourceTree = "<group>";
@@ -287,10 +311,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4866303C197384AA002A740C /* ProfileViewController.xib in Resources */,
 				48C5C82A19613C060066E3CD /* InfoPlist.strings in Resources */,
 				487E56501966656300B49F6E /* TweetViewController.xib in Resources */,
 				487E565A1968DABF00B49F6E /* ReplyViewController.xib in Resources */,
+				48275A9B1974DFAE006E1FA9 /* ContainerViewController.xib in Resources */,
 				487E5646196639DE00B49F6E /* TimeLineViewController.xib in Resources */,
+				486630371973846D002A740C /* MainMenuViewController.xib in Resources */,
 				48C5C83219613C060066E3CD /* Images.xcassets in Resources */,
 				48904D721962736A00EC3E95 /* LoginViewController.xib in Resources */,
 				487E56551968D6A700B49F6E /* TweetCell.xib in Resources */,
@@ -347,12 +374,15 @@
 			files = (
 				487E56541968D6A700B49F6E /* TweetCell.m in Sources */,
 				487E5645196639DE00B49F6E /* TimeLineViewController.m in Sources */,
+				48275A9A1974DFAE006E1FA9 /* ContainerViewController.m in Sources */,
 				48904D6D1962723000EC3E95 /* TwitterClient.m in Sources */,
 				487E56591968DABF00B49F6E /* ReplyViewController.m in Sources */,
+				486630361973846D002A740C /* MainMenuViewController.m in Sources */,
 				487E56411966301400B49F6E /* User.m in Sources */,
 				487E565D196A728000B49F6E /* Tweet.m in Sources */,
 				487E564F1966656300B49F6E /* TweetViewController.m in Sources */,
 				48C5C83019613C060066E3CD /* AppDelegate.m in Sources */,
+				4866303B197384AA002A740C /* ProfileViewController.m in Sources */,
 				48C5C85019613CB00066E3CD /* RottenTomatoesClient.m in Sources */,
 				48C5C82C19613C060066E3CD /* main.m in Sources */,
 				48904D711962736A00EC3E95 /* LoginViewController.m in Sources */,

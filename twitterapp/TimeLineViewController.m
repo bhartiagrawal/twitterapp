@@ -11,6 +11,7 @@
 #import "TweetViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "Tweet.h"
+#import "MainMenuViewController.h"
 
 @interface TimeLineViewController ()
 {
@@ -18,6 +19,8 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *tweets;
+@property (nonatomic, strong) MainMenuViewController *mmvc;
+@property (nonatomic, strong) TweetViewController *tvc;
 
 @end
 
@@ -47,6 +50,7 @@
     self.tableView.rowHeight = 100;
     
     [self.tableView reloadData];
+    
 
 }
 
@@ -121,6 +125,8 @@
     
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+
 
 
 
